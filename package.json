@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-	"scripts": {
-		"dev": "tsx watch src/server.ts",
-		"start": "node build/server.js",
-		"build": "tsup src --out-dir build"
-	},
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build"
+  },
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "16.3.1",
+    "express": "^4.18.2",
+    "zod": "3.21.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
