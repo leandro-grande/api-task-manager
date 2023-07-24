@@ -1,14 +1,15 @@
 version: '3.9'
 
 services:
-  database_mongo:
-    image: mongo
+  mongo:
     container_name: db_task
+    build: ./mongodb_rs
     restart: always
-    ports:
-      - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=docker
-    volumes:
-      - ./data:/data/db
+      - MONGO_INITDB_DATABASE=db_task
+      - MONGO_REPLICA_HOST=localhost
+      - MONGO_REPLICA_PORT=27017
+    ports:
+      - 27017:27017
