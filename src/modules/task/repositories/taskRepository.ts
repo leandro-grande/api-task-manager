@@ -3,7 +3,6 @@ import { ITaskRepository } from './ITaskRepository';
 import { prisma } from '../../../database/prisma';
 
 
-
 export class TaskRepository implements ITaskRepository {
 	async create(data: Prisma.TaskUncheckedCreateInput){
 		const task = await prisma.task.create({
@@ -20,4 +19,13 @@ export class TaskRepository implements ITaskRepository {
 		return task;
 	}
 
+	async findById(taskId: string) {
+		const task = await prisma.task.findFirst({
+			where: {
+				id: taskId
+			}
+		});
+
+		return task;
+	}
 }
