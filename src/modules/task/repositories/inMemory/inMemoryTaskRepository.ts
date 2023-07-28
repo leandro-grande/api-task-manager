@@ -28,4 +28,16 @@ export class inMemoryTaskRepository implements ITaskRepository {
 		return task;
 	}
 
+	async update(taskId: string, completed: boolean) {
+		const taskIndex = this.items.findIndex(item => item.id === taskId);
+
+		if (taskIndex < 0) {
+			return null;
+		}
+
+		this.items[taskIndex].completed = completed;
+
+		return this.items[taskIndex];
+	}
+
 }
