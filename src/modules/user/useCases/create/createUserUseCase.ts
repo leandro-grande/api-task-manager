@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
 
-import { UserRepository } from '../../repositories/userRepository';
 import { AppError } from '../../../../util/AppError';
+import { IUserRepository } from '../../repositories/IUserRepository';
 
 interface IRequest {
 	name: string;
@@ -17,7 +17,7 @@ interface IResponse {
 }
 
 export class CreateUserUseCase {
-	constructor( private readonly userRepository: UserRepository ) {}
+	constructor( private readonly userRepository: IUserRepository ) {}
 
 	async execute({name, email, password}: IRequest): Promise<IResponse> {
 		const userAlreadyExists = await this.userRepository.findByEmail(email);

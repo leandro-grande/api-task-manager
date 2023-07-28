@@ -1,5 +1,5 @@
 import { Task } from '@prisma/client';
-import { TaskRepository } from '../../repositories/taskRepository';
+import { ITaskRepository } from '../../repositories/ITaskRepository';
 
 interface IRequest {
 	userId: string;
@@ -8,7 +8,7 @@ interface IRequest {
 
 export class CreateTaskUseCase {
 	constructor(
-		private readonly taskRepository: TaskRepository
+		private readonly taskRepository: ITaskRepository
 	) {}
 	async execute({ title, userId }: IRequest): Promise<Task> {
 		const task = await this.taskRepository.create({
