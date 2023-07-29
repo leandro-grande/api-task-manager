@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 
 import { ITaskRepository } from '../ITaskRepository';
 
+
 export class inMemoryTaskRepository implements ITaskRepository {
 	public items: Task[] = [];
 
@@ -15,7 +16,15 @@ export class inMemoryTaskRepository implements ITaskRepository {
 			created_at: new Date()
 		};
 
+		this.items.push(task);
+
 		return task;
+	}
+
+	async findMany(userId: string) {
+		const tasks = this.items.filter(item => item.userId === userId);
+
+		return tasks;
 	}
 
 	async findById(taskId: string) {

@@ -2,7 +2,17 @@ import { Prisma } from '@prisma/client';
 import { ITaskRepository } from './ITaskRepository';
 import { prisma } from '../../../database/prisma';
 
+
 export class TaskRepository implements ITaskRepository {
+	async findMany(userId: string) {
+		const tasks = await prisma.task.findMany({
+			where: {
+				userId
+			}
+		});
+
+		return tasks;
+	}
 
 	async create(data: Prisma.TaskUncheckedCreateInput){
 		const task = await prisma.task.create({
