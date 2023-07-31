@@ -4,6 +4,7 @@ import { prisma } from '../../../database/prisma';
 
 
 export class TaskRepository implements ITaskRepository {
+
 	async findMany(userId: string) {
 		const tasks = await prisma.task.findMany({
 			where: {
@@ -50,5 +51,13 @@ export class TaskRepository implements ITaskRepository {
 		});
 
 		return task;
+	}
+
+	async delete(taskId: string) {
+		await prisma.task.delete({
+			where: {
+				id: taskId
+			}
+		});
 	}
 }
