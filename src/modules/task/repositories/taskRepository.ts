@@ -39,13 +39,13 @@ export class TaskRepository implements ITaskRepository {
 		return task;
 	}
 
-	async update(taskId: string, completed: boolean) {
+	async update(taskId: string, isCompleted: boolean) {
 		const task = await prisma.task.update({
 			where: {
 				id: taskId
 			},
 			data: {
-				completed
+				isCompleted
 			}
 		});
 

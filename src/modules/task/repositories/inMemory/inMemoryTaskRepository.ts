@@ -12,7 +12,7 @@ export class inMemoryTaskRepository implements ITaskRepository {
 			id: randomUUID(),
 			title: data.title,
 			userId: data.userId,
-			completed: false,
+			isCompleted: false,
 			created_at: new Date()
 		};
 
@@ -44,7 +44,7 @@ export class inMemoryTaskRepository implements ITaskRepository {
 			return null;
 		}
 
-		this.items[taskIndex].completed = completed;
+		this.items[taskIndex].isCompleted = completed;
 
 		return this.items[taskIndex];
 	}

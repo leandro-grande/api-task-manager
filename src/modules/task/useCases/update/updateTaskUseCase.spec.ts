@@ -22,6 +22,6 @@ describe('Update task', () => {
 			completed: false
 		});
 
-		expect(task.completed).toBe(false);
+		expect(task.isCompleted).toBe(false);
 	});
 });
