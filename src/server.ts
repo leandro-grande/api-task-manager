@@ -2,12 +2,14 @@
 import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
 import { ZodError } from 'zod';
+import cors from 'cors';
 
 import { AppError } from './util/AppError';
 import { env } from './env';
 import { routes } from './routes';
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 
