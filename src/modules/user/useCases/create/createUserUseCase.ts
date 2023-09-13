@@ -2,6 +2,8 @@ import { hash } from 'bcryptjs';
 
 import { AppError } from '../../../../util/AppError';
 import { IUserRepository } from '../../repositories/IUserRepository';
+import { sign } from 'jsonwebtoken';
+import { env } from '../../../../env';
 
 interface IRequest {
 	name: string;
@@ -13,7 +15,8 @@ interface IResponse {
 	id: string,
 	name: string,
 	email: string,
-	avatar_url: string
+	avatar_url: string,
+	token: string
 }
 
 export class CreateUserUseCase {
@@ -34,11 +37,20 @@ export class CreateUserUseCase {
 			password: passwordHash
 		});
 
+		const token = sign({},
+			env.JWT_SECRET,
+			{
+				subject: user.id,
+				expiresIn: '1d'
+			}
+		);
+
 		return {
 			id: user.id,
 			name: user.name,
 			email: user.email,
-			avatar_url: user.avatar_url
+			avatar_url: user.avatar_url,
+			token
 		};
 	}
 }
