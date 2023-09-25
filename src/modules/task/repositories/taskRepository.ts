@@ -9,6 +9,9 @@ export class TaskRepository implements ITaskRepository {
 		const tasks = await prisma.task.findMany({
 			where: {
 				userId
+			},
+			orderBy: {
+				created_at: 'asc'
 			}
 		});
 

@@ -1,14 +1,17 @@
-version: '3.9'
+version: "3.8"
 
 services:
-  mongo:
-    build: ./mongodb_rs
+  datbase_posgres:
+    image: postgres
+    container_name: task-manager
     restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=docker
-      - MONGO_INITDB_DATABASE=db_task
-      - MONGO_REPLICA_HOST=localhost
-      - MONGO_REPLICA_PORT=27017
     ports:
-      - 27017:27017
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=task-manager
+    volumes:
+      - my-db:/var/lib/postgresql/data
+volumes:
+  my-db:
