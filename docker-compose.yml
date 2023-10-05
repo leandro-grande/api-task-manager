@@ -1,17 +1,28 @@
 version: "3.8"
 
 services:
-  datbase_posgres:
+  database:
     image: postgres
-    container_name: task-manager
+    container_name: database
     restart: always
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=task-manager
+      - POSTGRES_DB=task-manager-database
     volumes:
       - my-db:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: task-manager
+    ports:
+      - "3333:3333"
+    links:
+      - database
+    environment:
+      DATABASE_URL: "postgresql://docker:docker@database:5432/task-manager?schema=public"
+
 volumes:
   my-db:
