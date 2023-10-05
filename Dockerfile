@@ -1,4 +1,6 @@
-FROM node:18-alpine
+FROM node:18
+
+RUN npm install -g npm@latest --loglevel=error
 
 WORKDIR /usr/src/app
 
