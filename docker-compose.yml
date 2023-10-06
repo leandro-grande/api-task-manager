@@ -10,7 +10,7 @@ services:
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=task-manager-database
+      - POSTGRES_DB=database
     volumes:
       - my-db:/var/lib/postgresql/data
 
@@ -22,7 +22,7 @@ services:
     links:
       - database
     environment:
-      DATABASE_URL: "postgresql://docker:docker@database:5432/task-manager?schema=public"
+      DATABASE_URL: "postgresql://docker:docker@database:5432/database?schema=public"
 
 volumes:
   my-db:
